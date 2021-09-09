@@ -6,7 +6,7 @@ Scripts to run a Jenkins Agent in Docker.
 ## Required current user to execute docker command
 usermod -aG docker <username>
 
-## scripts
+## Scripts
 ```sh
 - build-ubuntu-jenkins-agent-image.sh    # build jenkins agent image base on ubuntu 20.04
   arguments: <keyname>
@@ -20,7 +20,7 @@ usermod -aG docker <username>
 - clean-jenkins-agent-ssh-key.sh    # remove key file in current directory.
 ```
 
-# Note
+## Note
 For "jenkins/ssh-agent" docker image, java is located in /opt/java/openjdk/bin/java
 When add slave node in Jenkins, specify it in "JavaPath"
 
