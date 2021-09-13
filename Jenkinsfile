@@ -11,15 +11,17 @@ def docker_hostport = "2222"
 pipeline {
 
     agent { node { label "${jenkins_agent_label}" } }
-    
+        
     stages {
-        stage("git clone jenkins agent repo") {
-            steps {
-                git url: "${git_repo_url}"
-                dir("${git_repo_name}") {
-                    sh "pwd"
+        if (env.git_clone) {
+            stage("git clone jenkins agent repo") {
+                steps {
+                    git url: "${git_repo_url}"
+                    dir("${git_repo_name}") {
+                        sh "pwd"
+                    }
+                    sh "ls -l"
                 }
-                sh "ls -l"
             }
         }
         
