@@ -10,7 +10,7 @@ if [ "$2" != "" ]; then
   CMD=${2}
 fi
 
-KEY='./jenkins_agent_key'
+KEY='./jenkins_agent_key' # use default key
 USER='jenkins'
 IP='127.0.0.1'
 
