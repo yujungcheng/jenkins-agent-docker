@@ -13,15 +13,13 @@ pipeline {
     agent { node { label "${jenkins_agent_label}" } }
         
     stages {
-        if (env.git_clone) {
-            stage("git clone jenkins agent repo") {
-                steps {
-                    git url: "${git_repo_url}"
-                    dir("${git_repo_name}") {
-                        sh "pwd"
-                    }
-                    sh "ls -l"
+        stage("git clone jenkins agent repo") {
+            steps {
+                git url: "${git_repo_url}"
+                dir("${git_repo_name}") {
+                    sh "pwd"
                 }
+                sh "ls -l"
             }
         }
         
