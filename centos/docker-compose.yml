@@ -1,0 +1,14 @@
+version: '3'
+services:
+  centos8_jenkins_agent:
+    container_name: jenkins_agent_centos8
+    image: centos8/jenkins-agent
+    ports:
+      - "2202:22"
+    build:
+      context: .
+    networks:
+      - net
+
+networks:
+  net:
