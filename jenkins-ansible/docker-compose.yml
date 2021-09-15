@@ -1,0 +1,15 @@
+version: '3'
+services:
+  jenkins-ansible:
+    container_name: jenkins_ansible
+    image: jenkins/jenkins
+    volumes:
+      - "$PWD/jenkins_home:/var/jenkins_home"
+    ports:
+      - "8088:8080"  # WEB UI
+      - "8089:50000"  # TCP Agent Listener Port
+    networks:
+      - net
+
+networks:
+  net:
