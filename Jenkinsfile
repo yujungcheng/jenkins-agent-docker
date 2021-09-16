@@ -19,7 +19,11 @@ pipeline {
                 dir("${git_repo_name}") {
                     sh "pwd"
                 }
-                sh "ls -l"
+                sh '''
+                    echo "--------------------------------------"
+                    ls -l
+                    echo "--------------------------------------"
+                '''
             }
         }
         
@@ -50,10 +54,12 @@ pipeline {
     
     post {
         always('remove ubuntu jenkins agent docker') {
-            sh "docker ps -f name=jenkins_agent_${docker_hostport} -q"
-            sh "docker stop jenkins_agent_${docker_hostport}"
-            sh "docker rm jenkins_agent_${docker_hostport}"
-            sh "docker rmi ${docker_image_name}"
+            sh """
+                docker ps -f name=jenkins_agent_${docker_hostport} -q
+                docker stop jenkins_agent_${docker_hostport}
+                docker rm jenkins_agent_${docker_hostport}
+                docker rmi ${docker_image_name}
+            """
             sh "./clean-jenkins-agent-ssh-key.sh ${ssh_key_name}"
         }
     }
