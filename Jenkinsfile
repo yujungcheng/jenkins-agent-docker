@@ -47,7 +47,9 @@ pipeline {
 
         stage('check ssh login') {
             steps {
-                sh "./ssh-to-jenkins-agent-docker.sh ${docker_hostport} hostname"
+                retry(3) {
+                    sh "./ssh-to-jenkins-agent-docker.sh ${docker_hostport} hostname"
+                }
             }
         }
     }
