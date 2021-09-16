@@ -51,7 +51,7 @@ pipeline {
                     sh "./ssh-to-jenkins-agent-docker.sh ${docker_hostport} hostname"
                 }
                 timeout(time: 1, unit: 'SECONDS') {
-                    sh "./ssh-to-jenkins-agent-docker.sh ${docker_hostport} uname -r"
+                    sh "./ssh-to-jenkins-agent-docker.sh ${docker_hostport} 'uname -r'"
                 }
             }
         }
