@@ -12,6 +12,7 @@ pipeline {
     environment {
         GIT_REPO_URL = 'https://github.com/yujungcheng/jenkins_agent_docker.git'
         GIT_REPO_NAME = 'jenkins_agent_docker'
+        //SECRET_DATA = credentials('secret-text')
     }
 
     stages {
@@ -68,6 +69,18 @@ pipeline {
                 docker rmi ${docker_image_name}
             """
             sh "./clean-jenkins-agent-ssh-key.sh ${ssh_key_name}"
+        }
+        success {
+            echo "==> Test successfully"
+        }
+        failure {
+            echo "==> Test failed"
+        }
+        unstable {
+            echo "==> Test unstable"
+        }
+        fixed {
+            echo "==> Test fixed"
         }
     }
 }
