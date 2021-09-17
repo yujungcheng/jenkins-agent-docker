@@ -1,8 +1,5 @@
 def jenkins_agent_label = "nuc10"
 
-def git_repo_url = "https://github.com/yujungcheng/jenkins_agent_docker.git"
-def git_repo_name = "jenkins_agent_docker"
-
 def ssh_key_name = "jenkins_agent_key"  // default key name
 def docker_image_name = "ubuntu-jenkins-agent:test"
 def docker_hostport = "2222"
@@ -11,12 +8,17 @@ def docker_hostport = "2222"
 pipeline {
 
     agent { node { label "${jenkins_agent_label}" } }
-        
+    
+    environment {
+        GIT_REPO_URL = 'https://github.com/yujungcheng/jenkins_agent_docker.git'
+        GIT_REPO_NAME = 'jenkins_agent_docker'
+    }
+
     stages {
         stage("git clone jenkins agent repo") {
             steps {
-                git url: "${git_repo_url}"
-                dir("${git_repo_name}") {
+                git url: "${GIT_REPO_URL}"
+                dir("${GIT_REPO_NAME}") {
                     sh "pwd"
                 }
                 sh '''
